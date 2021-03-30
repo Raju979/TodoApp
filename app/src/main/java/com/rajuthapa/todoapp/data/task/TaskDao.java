@@ -1,4 +1,4 @@
-package com.rajuthapa.todoapp.data;
+package com.rajuthapa.todoapp.data.task;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

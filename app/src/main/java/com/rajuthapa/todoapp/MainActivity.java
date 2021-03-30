@@ -3,8 +3,6 @@ package com.rajuthapa.todoapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
@@ -16,20 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.rajuthapa.todoapp.data.Task;
-import com.rajuthapa.todoapp.data.TaskViewModel;
+import com.rajuthapa.todoapp.data.task.Task;
+import com.rajuthapa.todoapp.data.task.TaskViewModel;
+import com.rajuthapa.todoapp.ui.task.AddEditTaskActivity;
+import com.rajuthapa.todoapp.ui.task.AddUpdateFragment;
+import com.rajuthapa.todoapp.ui.task.TaskAdapter;
 
 import java.util.Date;
 import java.util.List;
@@ -39,28 +36,20 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
     private TaskViewModel taskViewModel;
     public static final int ADD_NOTE_REQUEST = 1;
     public static final int EDIT_NOTE_REQUEST = 2;
-    private AddUpdateFragment fragment;
     private FloatingActionButton buttonAddTask;
-    private FrameLayout task_fragment;
     private Menu mn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        task_fragment  = (FrameLayout)findViewById(R.id.fragment_container);
-        buttonAddTask = findViewById(R.id.button_add_note);
-        hideTaskFragment();
+        buttonAddTask = findViewById(R.id.button_add_task);
         buttonAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Intent intent = new Intent(MainActivity.this, AddEditTaskActivity.class);
 //                startActivityForResult(intent,ADD_NOTE_REQUEST);
-                showTaskFragment();
-                fragment = new AddUpdateFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container,fragment)
-                        .commit();
+                displayFragment(null);
             }
         });
 
@@ -106,12 +95,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
                 bundle.putString("title", task.getTitle());
                 bundle.putString("description", task.getDescription());
                 bundle.putInt("priority", task.getPriority());
-                showTaskFragment();
-                fragment = new AddUpdateFragment();
-                fragment.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container,fragment)
-                        .commit();
+                displayFragment(bundle);
             }
         });
     }
@@ -165,6 +149,48 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
         }
     }
 
+    public void displayFragment(Bundle bundle) {
+        buttonAddTask.hide();
+        AddUpdateFragment taskAddUpdateFragment = AddUpdateFragment.newInstance();
+        if(bundle != null){
+            setTitle("Edit Tasks");
+            taskAddUpdateFragment.setArguments(bundle);
+        }
+        else{
+            setTitle("Add Tasks");
+        }
+        // Get the FragmentManager and start a transaction.
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Add the SimpleFragment.
+        fragmentTransaction.add(R.id.fragment_container,taskAddUpdateFragment).addToBackStack(null).commit();
+    }
+    public void closeFragment() {
+        //close keyboard if opened
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        // Get the FragmentManager.
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        AddUpdateFragment taskAddUpdateFragment = (AddUpdateFragment) fragmentManager
+                .findFragmentById(R.id.fragment_container);
+        if (taskAddUpdateFragment != null) {
+            // Create and commit the transaction to remove the fragment.
+            FragmentTransaction fragmentTransaction =
+                    fragmentManager.beginTransaction();
+            fragmentTransaction.remove(taskAddUpdateFragment).commit();
+        }
+        //change menu icons and title
+        setTitle("Todo App");
+        mn.findItem(R.id.delete_all_tasks).setVisible(true);
+        mn.findItem(R.id.save_task).setVisible(false);
+        //show floating action button
+        buttonAddTask.show();
+    }
+
     @Override
     public void onInputSend(int id,String title, String description, int priority) {
         this.setTitle("Todo App");
@@ -178,42 +204,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
             taskViewModel.insert(task);
             Toast.makeText(this,"Task Saved",Toast.LENGTH_SHORT).show();
         }
-        hideTaskFragment();
-        mn.findItem(R.id.delete_all_tasks).setVisible(true);
-        mn.findItem(R.id.save_task).setVisible(false);
-    }
-    public void hideTaskFragment(){
-        this.setTitle("Todo App");
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-        task_fragment.setVisibility(View.GONE);
-        if(!buttonAddTask.isShown()){
-            buttonAddTask.show();
-        }
-    }
-    public void cancelAddUpdate(){
-        this.setTitle("Todo App");
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-        task_fragment.setVisibility(View.GONE);
-        task_fragment.setVisibility(View.GONE);
-        if(!buttonAddTask.isShown()){
-            buttonAddTask.show();
-        }
-        mn.findItem(R.id.delete_all_tasks).setVisible(true);
-        mn.findItem(R.id.save_task).setVisible(false);
-    }
-
-    public void showTaskFragment(){
-        this.setTitle("Add Task");
-        task_fragment.setVisibility(View.VISIBLE);
-        buttonAddTask.hide();
+        closeFragment();
     }
 
 }

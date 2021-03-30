@@ -1,4 +1,4 @@
-package com.rajuthapa.todoapp;
+package com.rajuthapa.todoapp.ui.task;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Toast;
+
+import com.rajuthapa.todoapp.R;
 
 public class AddEditTaskActivity extends AppCompatActivity {
 

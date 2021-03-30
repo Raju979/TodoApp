@@ -1,10 +1,8 @@
-package com.rajuthapa.todoapp.data;
+package com.rajuthapa.todoapp.data.task;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Delete;
 
 import java.util.List;
 

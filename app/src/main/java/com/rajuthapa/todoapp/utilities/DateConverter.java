@@ -1,4 +1,4 @@
-package com.rajuthapa.todoapp.data;
+package com.rajuthapa.todoapp.utilities;
 
 import androidx.room.TypeConverter;
 

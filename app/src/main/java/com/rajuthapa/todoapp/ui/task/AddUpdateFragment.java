@@ -1,4 +1,4 @@
-package com.rajuthapa.todoapp;
+package com.rajuthapa.todoapp.ui.task;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,6 +16,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.rajuthapa.todoapp.MainActivity;
+import com.rajuthapa.todoapp.R;
 
 public class  AddUpdateFragment extends Fragment{
     private EditText editTextTitle;
@@ -55,7 +58,7 @@ public class  AddUpdateFragment extends Fragment{
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).cancelAddUpdate();
+                ((MainActivity)getActivity()).closeFragment();
             }
         });
         return v;

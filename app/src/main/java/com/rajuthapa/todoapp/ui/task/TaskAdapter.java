@@ -1,4 +1,4 @@
-package com.rajuthapa.todoapp;
+package com.rajuthapa.todoapp.ui.task;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rajuthapa.todoapp.data.Task;
+import com.rajuthapa.todoapp.R;
+import com.rajuthapa.todoapp.data.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
