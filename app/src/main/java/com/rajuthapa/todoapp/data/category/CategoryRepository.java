@@ -1,43 +1,43 @@
-package com.rajuthapa.todoapp.data.task;
+package com.rajuthapa.todoapp.data.category;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
 import com.rajuthapa.todoapp.data.TodoDatabase;
+import com.rajuthapa.todoapp.data.task.Task;
 
 import java.util.List;
 
-public class TaskRepository {
-    private TaskDao taskDao;
-    private LiveData<List<Task>> allTasks;
-
-    public TaskRepository(Application application){
+public class CategoryRepository {
+    private CategoryDao categoryDao;
+    private LiveData<List<Category>> allCategories;
+    public CategoryRepository(Application application){
         TodoDatabase database = TodoDatabase.getInstance(application);
-        taskDao = database.taskDao();
-        allTasks = taskDao.getAllTasks();
+        categoryDao = database.categoryDao();
+        allCategories = categoryDao.getAllCategory();
     }
-    public void insert(Task task){
+    public void insert(Category category){
         TodoDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                taskDao.insert(task);
+                categoryDao.insert(category);
             }
         });
     }
-    public void update(Task task){
+    public void update(Category category){
         TodoDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                taskDao.update(task);
+                categoryDao.update(category);
             }
         });
     }
-    public void delete(Task task){
+    public void delete(Category category){
         TodoDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                taskDao.delete(task);
+                categoryDao.delete(category);
             }
         });
     }
@@ -45,11 +45,11 @@ public class TaskRepository {
         TodoDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                taskDao.deleteAllTasks();
+                categoryDao.deleteAllCategories();
             }
         });
     }
-    public LiveData<List<Task>> getAllTasks(){
-        return allTasks;
+    public LiveData<List<Category>> getAllCategories(){
+        return allCategories;
     }
 }
