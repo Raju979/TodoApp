@@ -6,4 +6,11 @@
     <string name="add_priority">Add Priority</string>
     <string name="description">Description</string>
     <string name="title">Title</string>
+    <string name="category_name">Category Name</string>
+    <string name="category_description">Category Description</string>
+    <string name="add_task">Add Task</string>
+    <string name="_1">1</string>
+    <string name="delete_all_categories">Delete all categories</string>
+    <string name="delete_all_tasks">Delete all tasks</string>
+    <string name="save">Save</string>
 </resources>

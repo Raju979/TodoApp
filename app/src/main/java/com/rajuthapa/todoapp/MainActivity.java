@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
             }
         });
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_task);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         final TaskAdapter adapter = new TaskAdapter();
