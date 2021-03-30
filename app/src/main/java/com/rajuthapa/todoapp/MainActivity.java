@@ -94,12 +94,24 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
         adapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Task task) {
-                Intent intent = new Intent(MainActivity.this, AddEditTaskActivity.class);
-                intent.putExtra(AddEditTaskActivity.EXTRA_ID,task.getId());
-                intent.putExtra(AddEditTaskActivity.EXTRA_TITLE,task.getTitle());
-                intent.putExtra(AddEditTaskActivity.EXTRA_DESCRIPTION,task.getDescription());
-                intent.putExtra(AddEditTaskActivity.EXTRA_PRIORITY,task.getPriority());
-                startActivityForResult(intent,EDIT_NOTE_REQUEST);
+//                Intent intent = new Intent(MainActivity.this, AddEditTaskActivity.class);
+//                intent.putExtra(AddEditTaskActivity.EXTRA_ID,task.getId());
+//                intent.putExtra(AddEditTaskActivity.EXTRA_TITLE,task.getTitle());
+//                intent.putExtra(AddEditTaskActivity.EXTRA_DESCRIPTION,task.getDescription());
+//                intent.putExtra(AddEditTaskActivity.EXTRA_PRIORITY,task.getPriority());
+//                startActivityForResult(intent,EDIT_NOTE_REQUEST);
+//
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", task.getId());
+                bundle.putString("title", task.getTitle());
+                bundle.putString("description", task.getDescription());
+                bundle.putInt("priority", task.getPriority());
+                showTaskFragment();
+                fragment = new AddUpdateFragment();
+                fragment.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container,fragment)
+                        .commit();
             }
         });
     }
@@ -154,11 +166,18 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
     }
 
     @Override
-    public void onInputSend(String title, String description, int priority) {
+    public void onInputSend(int id,String title, String description, int priority) {
         this.setTitle("Todo App");
         Task task = new Task(title,description,priority,new Date());
-        taskViewModel.insert(task);
-        Toast.makeText(this,"Task Saved",Toast.LENGTH_SHORT).show();
+        if(id != -1){
+            task.setId(id);
+            taskViewModel.update(task);
+            Toast.makeText(this,"Task Updated",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            taskViewModel.insert(task);
+            Toast.makeText(this,"Task Saved",Toast.LENGTH_SHORT).show();
+        }
         hideTaskFragment();
         mn.findItem(R.id.delete_all_tasks).setVisible(true);
         mn.findItem(R.id.save_task).setVisible(false);
@@ -170,7 +189,6 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-        task_fragment.setVisibility(View.GONE);
         task_fragment.setVisibility(View.GONE);
         if(!buttonAddTask.isShown()){
             buttonAddTask.show();

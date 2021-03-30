@@ -24,10 +24,15 @@ public class  AddUpdateFragment extends Fragment{
     private Button cancel;
     private fragAddUpdateListener listener;
 
-    public interface fragAddUpdateListener{
-        void onInputSend(String title, String description, int priority);
-    }
+    public AddUpdateFragment(){
 
+    }
+    public interface fragAddUpdateListener{
+        void onInputSend(int id, String title, String description, int priority);
+    }
+    public static AddUpdateFragment newInstance() {
+        return new AddUpdateFragment();
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,6 +43,14 @@ public class  AddUpdateFragment extends Fragment{
         numberPickerPriority.setMaxValue(10);
         numberPickerPriority.setMinValue(1);
 
+        if(getArguments() != null){
+            String title = getArguments().getString("title");
+            String description = getArguments().getString("description");
+            int priority = getArguments().getInt("priority");
+            editTextTitle.setText(title);
+            editTextDescription.setText(description);
+            numberPickerPriority.setValue(priority);
+        }
         cancel = v.findViewById(R.id.button_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +94,7 @@ public class  AddUpdateFragment extends Fragment{
         }
     }
     private void saveTask(){
+        int id = -1;
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
         int priority = numberPickerPriority.getValue();
@@ -88,7 +102,10 @@ public class  AddUpdateFragment extends Fragment{
             Toast.makeText(getActivity(),"Please fill title and description",Toast.LENGTH_SHORT).show();
             return;
         }
-        listener.onInputSend(title,description,priority);
+        if(getArguments() != null){
+            id = getArguments().getInt("id");
+        }
+        listener.onInputSend(id,title,description,priority);
     }
 
     @Override
