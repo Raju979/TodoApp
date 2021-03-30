@@ -1,7 +1,6 @@
 package com.rajuthapa.todoapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,8 +15,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 public class  AddUpdateFragment extends Fragment{
@@ -45,7 +42,7 @@ public class  AddUpdateFragment extends Fragment{
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).hideTaskFragment();
+                ((MainActivity)getActivity()).cancelAddUpdate();
             }
         });
         return v;
@@ -92,7 +89,6 @@ public class  AddUpdateFragment extends Fragment{
             return;
         }
         listener.onInputSend(title,description,priority);
-
     }
 
     @Override

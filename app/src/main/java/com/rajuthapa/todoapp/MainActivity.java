@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
     private AddUpdateFragment fragment;
     private FloatingActionButton buttonAddTask;
     private FrameLayout task_fragment;
-    private Button cancel;
+    private Menu mn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
+        this.mn = menu;
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.main_menu,menu);
         return true;
@@ -158,6 +160,8 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
         taskViewModel.insert(task);
         Toast.makeText(this,"Task Saved",Toast.LENGTH_SHORT).show();
         hideTaskFragment();
+        mn.findItem(R.id.delete_all_tasks).setVisible(true);
+        mn.findItem(R.id.save_task).setVisible(false);
     }
     public void hideTaskFragment(){
         this.setTitle("Todo App");
@@ -171,6 +175,21 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
         if(!buttonAddTask.isShown()){
             buttonAddTask.show();
         }
+    }
+    public void cancelAddUpdate(){
+        this.setTitle("Todo App");
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        task_fragment.setVisibility(View.GONE);
+        task_fragment.setVisibility(View.GONE);
+        if(!buttonAddTask.isShown()){
+            buttonAddTask.show();
+        }
+        mn.findItem(R.id.delete_all_tasks).setVisible(true);
+        mn.findItem(R.id.save_task).setVisible(false);
     }
 
     public void showTaskFragment(){
