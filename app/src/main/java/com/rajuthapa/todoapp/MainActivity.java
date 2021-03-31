@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.rajuthapa.todoapp.data.category.CategoryViewModel;
 import com.rajuthapa.todoapp.data.task.Task;
 import com.rajuthapa.todoapp.data.task.TaskViewModel;
 import com.rajuthapa.todoapp.ui.task.AddEditTaskActivity;
@@ -34,6 +35,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements AddUpdateFragment.fragAddUpdateListener {
 
     private TaskViewModel taskViewModel;
+    private CategoryViewModel categoryViewModel;
+    
     public static final int ADD_NOTE_REQUEST = 1;
     public static final int EDIT_NOTE_REQUEST = 2;
     private FloatingActionButton buttonAddTask;

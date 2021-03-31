@@ -13,4 +13,6 @@
     <string name="delete_all_categories">Delete all categories</string>
     <string name="delete_all_tasks">Delete all tasks</string>
     <string name="save">Save</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
