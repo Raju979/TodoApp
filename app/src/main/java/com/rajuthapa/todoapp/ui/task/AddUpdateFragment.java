@@ -83,6 +83,7 @@ public class  AddUpdateFragment extends Fragment{
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.findItem(R.id.delete_all_tasks).setVisible(false);
+        menu.findItem(R.id.delete_all_categories).setVisible(false);
         inflater.inflate(R.menu.add_task_menu,menu);
     }
 

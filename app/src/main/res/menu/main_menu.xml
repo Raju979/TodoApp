@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:title="@string/delete_all_categories" />
+    <item
+        android:title="@string/delete_all_categories"
+        android:id="@+id/delete_all_categories"
+        />
     <item
     android:id="@+id/delete_all_tasks"
     android:title="@string/delete_all_tasks"

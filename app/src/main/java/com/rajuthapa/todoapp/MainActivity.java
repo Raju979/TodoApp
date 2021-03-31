@@ -55,52 +55,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
                 displayFragment(null);
             }
         });
-
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_task);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-        final TaskAdapter adapter = new TaskAdapter();
-        recyclerView.setAdapter(adapter);
-
-
-        taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
-        taskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
-            @Override
-            public void onChanged(List<Task> tasks) {
-                //update recycle view place
-                adapter.setTasks(tasks);
-            }
-        });
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                taskViewModel.delete(adapter.getTaskAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this,"Task Deleted",Toast.LENGTH_SHORT).show();
-            }
-        }).attachToRecyclerView(recyclerView);
-        adapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Task task) {
-//                Intent intent = new Intent(MainActivity.this, AddEditTaskActivity.class);
-//                intent.putExtra(AddEditTaskActivity.EXTRA_ID,task.getId());
-//                intent.putExtra(AddEditTaskActivity.EXTRA_TITLE,task.getTitle());
-//                intent.putExtra(AddEditTaskActivity.EXTRA_DESCRIPTION,task.getDescription());
-//                intent.putExtra(AddEditTaskActivity.EXTRA_PRIORITY,task.getPriority());
-//                startActivityForResult(intent,EDIT_NOTE_REQUEST);
-//
-                Bundle bundle = new Bundle();
-                bundle.putInt("id", task.getId());
-                bundle.putString("title", task.getTitle());
-                bundle.putString("description", task.getDescription());
-                bundle.putInt("priority", task.getPriority());
-                displayFragment(bundle);
-            }
-        });
+        manageTaskView();
     }
 
     @Override
@@ -208,6 +163,91 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
             Toast.makeText(this,"Task Saved",Toast.LENGTH_SHORT).show();
         }
         closeFragment();
+    }
+
+    public void manageTaskView(){
+        RecyclerView recyclerViewTask = findViewById(R.id.recycler_view_task);
+        recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewTask.setHasFixedSize(true);
+        final TaskAdapter taskAdapter = new TaskAdapter();
+        recyclerViewTask.setAdapter(taskAdapter);
+        taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
+        taskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
+            @Override
+            public void onChanged(List<Task> tasks) {
+                //update recycle view place
+                taskAdapter.setTasks(tasks);
+            }
+        });
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                taskViewModel.delete(taskAdapter.getTaskAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(MainActivity.this,"Task Deleted",Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(recyclerViewTask);
+        taskAdapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Task task) {
+//                Intent intent = new Intent(MainActivity.this, AddEditTaskActivity.class);
+//                intent.putExtra(AddEditTaskActivity.EXTRA_ID,task.getId());
+//                intent.putExtra(AddEditTaskActivity.EXTRA_TITLE,task.getTitle());
+//                intent.putExtra(AddEditTaskActivity.EXTRA_DESCRIPTION,task.getDescription());
+//                intent.putExtra(AddEditTaskActivity.EXTRA_PRIORITY,task.getPriority());
+//                startActivityForResult(intent,EDIT_NOTE_REQUEST);
+//
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", task.getId());
+                bundle.putString("title", task.getTitle());
+                bundle.putString("description", task.getDescription());
+                bundle.putInt("priority", task.getPriority());
+                displayFragment(bundle);
+            }
+        });
+    }
+
+    public void manageCategoryView(){
+        RecyclerView recyclerViewTask = findViewById(R.id.recycler_view_task);
+        recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewTask.setHasFixedSize(true);
+        final TaskAdapter taskAdapter = new TaskAdapter();
+        recyclerViewTask.setAdapter(taskAdapter);
+        taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
+        taskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
+            @Override
+            public void onChanged(List<Task> tasks) {
+                //update recycle view place
+                taskAdapter.setTasks(tasks);
+            }
+        });
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                taskViewModel.delete(taskAdapter.getTaskAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(MainActivity.this,"Task Deleted",Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(recyclerViewTask);
+        taskAdapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Task task) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", task.getId());
+                bundle.putString("title", task.getTitle());
+                bundle.putString("description", task.getDescription());
+                bundle.putInt("priority", task.getPriority());
+                displayFragment(bundle);
+            }
+        });
     }
 
 }
