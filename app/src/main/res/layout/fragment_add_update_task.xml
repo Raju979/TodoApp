@@ -5,17 +5,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/cardview_light_background"
-    tools:context=".ui.task.AddUpdateFragment">
+    tools:context=".ui.task.AddUpdateTaskFragment">
 
     <EditText
-        android:id="@+id/edit_text_title"
+        android:id="@+id/edit_text_title_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/title"
         android:inputType="text"
         android:autofillHints="@string/title" />
     <EditText
-        android:id="@+id/edit_text_description"
+        android:id="@+id/edit_text_description_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/description"
@@ -26,15 +26,34 @@
         android:layout_height="wrap_content"
         android:text="@string/add_priority"
         />
-    <NumberPicker
-        android:id="@+id/number_picker_priority"
+<!--    <NumberPicker-->
+<!--        android:id="@+id/number_picker_priority"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        />-->
+    <RadioGroup
+        android:id="@+id/radio_priority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        >
 
-        />
+        <RadioButton
+            android:id="@+id/radio0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Low Priority" />
+        <RadioButton
+            android:id="@+id/radio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High Priority" />
+
+
+    </RadioGroup>
 
     <Button
-        android:id="@+id/button_cancel"
+        android:id="@+id/button_cancel_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

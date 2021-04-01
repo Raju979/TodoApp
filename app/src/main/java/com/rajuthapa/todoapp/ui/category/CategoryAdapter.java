@@ -24,7 +24,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public CategoryAdapter.CategoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.task_item,parent,false);
+                .inflate(R.layout.category_item,parent,false);
 
         return new CategoryAdapter.CategoryHolder(itemView);
     }
@@ -55,8 +55,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         public CategoryHolder(@NonNull View itemView) {
             super(itemView);
-            textViewTitle = itemView.findViewById(R.id.text_view_title);
-            textViewDescription= itemView.findViewById(R.id.text_view_description);
+            textViewTitle = itemView.findViewById(R.id.text_view_cat_name);
+            textViewDescription= itemView.findViewById(R.id.text_view_cat_description);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

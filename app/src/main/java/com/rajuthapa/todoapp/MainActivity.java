@@ -19,21 +19,24 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.rajuthapa.todoapp.data.category.Category;
 import com.rajuthapa.todoapp.data.category.CategoryViewModel;
 import com.rajuthapa.todoapp.data.task.Task;
 import com.rajuthapa.todoapp.data.task.TaskViewModel;
+import com.rajuthapa.todoapp.ui.category.AddUpdateCatFragment;
 import com.rajuthapa.todoapp.ui.category.CategoryAdapter;
 import com.rajuthapa.todoapp.ui.task.AddEditTaskActivity;
-import com.rajuthapa.todoapp.ui.task.AddUpdateFragment;
+import com.rajuthapa.todoapp.ui.task.AddUpdateTaskFragment;
 import com.rajuthapa.todoapp.ui.task.TaskAdapter;
 
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AddUpdateFragment.fragAddUpdateListener {
+public class MainActivity extends AppCompatActivity implements AddUpdateTaskFragment.fragTaskAddUpdateListener, AddUpdateCatFragment.fragCatAddUpdateListener {
 
     private TaskViewModel taskViewModel;
     private CategoryViewModel categoryViewModel;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
     public static final int ADD_NOTE_REQUEST = 1;
     public static final int EDIT_NOTE_REQUEST = 2;
     private FloatingActionButton buttonAddTask;
+    private Button addCategoryButton;
     private Menu mn;
 
     @Override
@@ -53,9 +57,17 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
             public void onClick(View v) {
 //                Intent intent = new Intent(MainActivity.this, AddEditTaskActivity.class);
 //                startActivityForResult(intent,ADD_NOTE_REQUEST);
-                displayFragment(null);
+                displayTaskFragment(null);
             }
         });
+        addCategoryButton = findViewById(R.id.button_add_category);
+        addCategoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayCategoryFragment(null);
+            }
+        });
+        manageCategoryView();
         manageTaskView();
     }
 
@@ -67,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
             String description = data.getStringExtra(AddEditTaskActivity.EXTRA_DESCRIPTION);
             int priority = Integer.parseInt(data.getStringExtra(AddEditTaskActivity.EXTRA_PRIORITY));
 
-            Task task = new Task(title,description,priority,new Date());
+            Task task = new Task(title,description,priority,new Date(),1);
             taskViewModel.insert(task);
             Toast.makeText(this,"Task Saved",Toast.LENGTH_SHORT).show();
         }
@@ -80,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
             String title = data.getStringExtra(AddEditTaskActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditTaskActivity.EXTRA_DESCRIPTION);
             int priority = Integer.parseInt(data.getStringExtra(AddEditTaskActivity.EXTRA_PRIORITY));
-            Task task = new Task(title,description,priority,new Date());
+            Task task = new Task(title,description,priority,new Date(),1);
             task.setId(id);
             taskViewModel.update(task);
             Toast.makeText(this,"Task Updated",Toast.LENGTH_SHORT).show();
@@ -108,12 +120,32 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
         }
     }
 
-    public void displayFragment(Bundle bundle) {
+    public void displayCategoryFragment(Bundle bundle) {
         buttonAddTask.hide();
-        AddUpdateFragment taskAddUpdateFragment = AddUpdateFragment.newInstance();
+        addCategoryButton.setVisibility(View.GONE);
+        AddUpdateCatFragment taskAddUpdateCatFragment = AddUpdateCatFragment.newInstance();
+        if(bundle != null){
+            setTitle("Edit Category");
+            taskAddUpdateCatFragment.setArguments(bundle);
+        }
+        else{
+            setTitle("Add Category");
+        }
+        // Get the FragmentManager and start a transaction.
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Add the SimpleFragment.
+        fragmentTransaction.add(R.id.fragment_container_category, taskAddUpdateCatFragment).addToBackStack(null).commit();
+    }
+
+    public void displayTaskFragment(Bundle bundle) {
+        buttonAddTask.hide();
+        addCategoryButton.setVisibility(View.GONE);
+        AddUpdateTaskFragment taskAddUpdateTaskFragment = AddUpdateTaskFragment.newInstance();
         if(bundle != null){
             setTitle("Edit Tasks");
-            taskAddUpdateFragment.setArguments(bundle);
+            taskAddUpdateTaskFragment.setArguments(bundle);
         }
         else{
             setTitle("Add Tasks");
@@ -123,9 +155,9 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         // Add the SimpleFragment.
-        fragmentTransaction.add(R.id.fragment_container,taskAddUpdateFragment).addToBackStack(null).commit();
+        fragmentTransaction.add(R.id.fragment_container_task, taskAddUpdateTaskFragment).addToBackStack(null).commit();
     }
-    public void closeFragment() {
+    public void closeCategoryFragment() {
         //close keyboard if opened
         View view = this.getCurrentFocus();
         if (view != null) {
@@ -134,18 +166,44 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
         }
         // Get the FragmentManager.
         FragmentManager fragmentManager = getSupportFragmentManager();
-        AddUpdateFragment taskAddUpdateFragment = (AddUpdateFragment) fragmentManager
-                .findFragmentById(R.id.fragment_container);
-        if (taskAddUpdateFragment != null) {
+        AddUpdateCatFragment taskAddUpdateCategoryFragment = (AddUpdateCatFragment) fragmentManager
+                .findFragmentById(R.id.fragment_container_category);
+        if (taskAddUpdateCategoryFragment != null) {
             // Create and commit the transaction to remove the fragment.
             FragmentTransaction fragmentTransaction =
                     fragmentManager.beginTransaction();
-            fragmentTransaction.remove(taskAddUpdateFragment).commit();
+            fragmentTransaction.remove(taskAddUpdateCategoryFragment).commit();
         }
         //change menu icons and title
         setTitle("Todo App");
         mn.findItem(R.id.delete_all_tasks).setVisible(true);
         mn.findItem(R.id.save_task).setVisible(false);
+        addCategoryButton.setVisibility(View.VISIBLE);
+        //show floating action button
+        buttonAddTask.show();
+    }
+    public void closeTaskFragment() {
+        //close keyboard if opened
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        // Get the FragmentManager.
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        AddUpdateTaskFragment taskAddUpdateTaskFragment = (AddUpdateTaskFragment) fragmentManager
+                .findFragmentById(R.id.fragment_container_task);
+        if (taskAddUpdateTaskFragment != null) {
+            // Create and commit the transaction to remove the fragment.
+            FragmentTransaction fragmentTransaction =
+                    fragmentManager.beginTransaction();
+            fragmentTransaction.remove(taskAddUpdateTaskFragment).commit();
+        }
+        //change menu icons and title
+        setTitle("Todo App");
+        mn.findItem(R.id.delete_all_tasks).setVisible(true);
+        mn.findItem(R.id.save_task).setVisible(false);
+        addCategoryButton.setVisibility(View.VISIBLE);
         //show floating action button
         buttonAddTask.show();
     }
@@ -153,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
     @Override
     public void onInputSend(int id,String title, String description, int priority) {
         this.setTitle("Todo App");
-        Task task = new Task(title,description,priority,new Date());
+        Task task = new Task(title,description,priority,new Date(),3);
         if(id != -1){
             task.setId(id);
             taskViewModel.update(task);
@@ -163,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
             taskViewModel.insert(task);
             Toast.makeText(this,"Task Saved",Toast.LENGTH_SHORT).show();
         }
-        closeFragment();
+        closeTaskFragment();
     }
 
     public void manageTaskView(){
@@ -207,23 +265,23 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
                 bundle.putString("title", task.getTitle());
                 bundle.putString("description", task.getDescription());
                 bundle.putInt("priority", task.getPriority());
-                displayFragment(bundle);
+                displayTaskFragment(bundle);
             }
         });
     }
 
     public void manageCategoryView(){
-        RecyclerView recyclerViewTask = findViewById(R.id.recycler_view_task);
-        recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewTask.setHasFixedSize(true);
+        RecyclerView recyclerViewCategory = findViewById(R.id.recycler_view_category);
+        recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewCategory.setHasFixedSize(true);
         final CategoryAdapter categoryAdapter = new CategoryAdapter();
-        recyclerViewTask.setAdapter(categoryAdapter);
-        taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
-        taskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
+        recyclerViewCategory.setAdapter(categoryAdapter);
+        categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        categoryViewModel.getAllCategories().observe(this, new Observer<List<Category>>() {
             @Override
-            public void onChanged(List<Task> tasks) {
+            public void onChanged(List<Category> categories) {
                 //update recycle view place
-                categoryAdapter.setTasks(tasks);
+                categoryAdapter.setCategories(categories);
             }
         });
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -234,21 +292,35 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                taskViewModel.delete(categoryAdapter.getTaskAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this,"Task Deleted",Toast.LENGTH_SHORT).show();
+                categoryViewModel.delete(categoryAdapter.getCategoryAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(MainActivity.this,"Category Deleted",Toast.LENGTH_SHORT).show();
             }
-        }).attachToRecyclerView(recyclerViewTask);
-        categoryAdapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
+        }).attachToRecyclerView(recyclerViewCategory);
+        categoryAdapter.setOnItemClickListener(new CategoryAdapter.OnItemClickListener(){
             @Override
-            public void onItemClick(Task task) {
+            public void onItemClick(Category category) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("id", task.getId());
-                bundle.putString("title", task.getTitle());
-                bundle.putString("description", task.getDescription());
-                bundle.putInt("priority", task.getPriority());
-                displayFragment(bundle);
+                bundle.putInt("id", category.getId());
+                bundle.putString("title", category.getCat_name());
+                bundle.putString("description", category.getCat_des());
+                displayCategoryFragment(bundle);
             }
         });
     }
 
+    @Override
+    public void onInputCategorySend(int id, String title, String description) {
+        this.setTitle("Todo App");
+        Category category = new Category(title,description);
+        if(id != -1){
+            category.setId(id);
+            categoryViewModel.update(category);
+            Toast.makeText(this,"Category Updated",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            categoryViewModel.insert(category);
+            Toast.makeText(this,"Category Saved",Toast.LENGTH_SHORT).show();
+        }
+        closeCategoryFragment();
+    }
 }

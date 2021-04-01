@@ -59,12 +59,12 @@ public abstract class TodoDatabase extends RoomDatabase {
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            taskDao.insert(new Task(
-                    "Title 1","Description 1",1,new Date()
-            ));
-            taskDao.insert(new Task(
-                    "Title 2","Description 2",2,new Date()
-            ));
+//            taskDao.insert(new Task(
+//                    "Title 1","Description 1",1,new Date()
+//            ));
+//            taskDao.insert(new Task(
+//                    "Title 2","Description 2",2,new Date()
+//            ));
             return null;
         }
     }

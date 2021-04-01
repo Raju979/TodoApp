@@ -20,7 +20,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_alignParentRight="true" />
         <TextView
-            android:id="@+id/text_view_title"
+            android:id="@+id/text_view_title_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title"
@@ -31,10 +31,10 @@
             android:layout_toLeftOf="@id/text_view_priority"
             android:layout_alignParentLeft="true" />
         <TextView
-            android:id="@+id/text_view_description"
+            android:id="@+id/text_view_description_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_title"
+            android:layout_below="@id/text_view_title_task"
             android:text="@string/description"
             />
     </RelativeLayout>
