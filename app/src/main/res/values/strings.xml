@@ -6,4 +6,7 @@
     <string name="add_priority">Add Priority</string>
     <string name="description">Description</string>
     <string name="title">Title</string>
+    <string name="task_to_be_done">Task to be done</string>
+    <string name="due_date">Due Date</string>
+    <string name="date_not_set">Date Not Set</string>
 </resources>

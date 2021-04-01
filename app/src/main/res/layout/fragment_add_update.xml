@@ -6,20 +6,20 @@
     android:orientation="vertical"
     tools:context=".AddUpdateFragment">
 
-    <EditText
-        android:id="@+id/edit_text_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/title"
-        android:inputType="text"
-        />
-    <EditText
-        android:id="@+id/edit_text_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/description"
-        android:inputType="textMultiLine"
-        />
+<!--    <EditText-->
+<!--        android:id="@+id/edit_text_title"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="@string/title"-->
+<!--        android:inputType="text"-->
+<!--        />-->
+<!--    <EditText-->
+<!--        android:id="@+id/edit_text_description"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="@string/description"-->
+<!--        android:inputType="textMultiLine"-->
+<!--        />-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,5 +39,242 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:text="@string/cancel" />
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context=".activities.NewItem">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/task_to_be_done"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/tvNewTask"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true" />
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_text_title"
+                android:layout_below="@+id/tvNewTask"
+                android:layout_alignParentStart="true"
+                android:textColorHint="#B8BFC2"
+                android:hint="@string/title"
+                android:layout_alignParentLeft="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/task_to_be_done"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/description"
+                android:layout_below="@id/edit_text_title"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_text_description"
+                android:hint="@string/description"
+                android:inputType="textMultiLine"
+                android:layout_below="@+id/description"
+                android:layout_alignParentStart="true"
+                android:textColorHint="#B8BFC2"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="@string/due_date"
+                android:textSize="20sp"
+                android:id="@+id/tvDate"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/edit_text_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true" />
+
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/etDisplayDate"
+                android:layout_toStartOf="@+id/imgDate"
+                android:hint="@string/date_not_set"
+                android:textColorHint="#B8BFC2"
+                android:onClick="onDateSet"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:cursorVisible="false"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:paddingTop="8sp"
+                android:layout_below="@+id/tvDate"
+                android:layout_alignParentStart="true"
+                tools:ignore="TextFields"
+                android:layout_toLeftOf="@+id/imgDate" />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_baseline_date_range"
+                android:id="@+id/imgDate"
+                android:tint="@color/colorPrimary"
+                android:layout_below="@+id/tvDate"
+                android:layout_toStartOf="@+id/imgDateClear"
+                android:contentDescription="@string/click_to_set_date" />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_baseline_cancel"
+                android:layout_marginStart="10dp"
+                android:tint="@color/colorPrimary"
+                android:id="@+id/imgDateClear"
+                android:layout_below="@+id/tvDate"
+                android:layout_alignParentEnd="true"
+                android:onClick="clearDate"
+                android:contentDescription="@string/cancel_date" />
+
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/etDisplayTime"
+                android:layout_marginTop="20dp"
+                android:onClick="onTimeSet"
+                android:textColorHint="#B8BFC2"
+                android:hint="@string/time_not_set"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:cursorVisible="false"
+                android:textColor="@android:color/black"
+                android:paddingTop="8sp"
+                android:textSize="20sp"
+                android:layout_below="@+id/etDisplayDate"
+                android:layout_toStartOf="@+id/imgTime"
+                android:layout_alignParentStart="true" />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="20dp"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/ic_baseline_access_time_24"
+                android:id="@+id/imgTime"
+                android:layout_below="@+id/etDisplayDate"
+                android:layout_toStartOf="@+id/imgTimeClear"
+                android:contentDescription="@string/click_to_set_time" />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_baseline_cancel"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:tint="@color/colorPrimary"
+                android:id="@+id/imgTimeClear"
+                android:layout_below="@+id/etDisplayDate"
+                android:layout_alignParentEnd="true"
+                android:onClick="clearTime"
+                android:contentDescription="@string/cancel_time"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/enter_priority"
+                android:textSize="20sp"
+                android:layout_marginTop="30dp"
+                android:id="@+id/tvPriority"
+                android:layout_below="@+id/imgTime"
+                android:layout_alignParentStart="true" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvPriority"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp">
+
+
+                <RadioButton
+                    android:id="@+id/radio0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="RadioButton1" />
+
+                <RadioButton
+                    android:id="@+id/radio1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RadioButton2" />
+
+                <RadioButton
+                    android:id="@+id/radio2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RadioButton3" />
+            </RadioGroup>
+            <Button
+                android:id="@+id/addBtn"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
+                android:layout_below="@+id/radioGroup1"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="25dp"
+                android:backgroundTint="@color/accent"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="50dp"
+                android:contentDescription="@string/click_to_add"
+                android:elevation="15dp"
+                android:text="@string/add_button"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:translationZ="15dp" />
+
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
+                android:layout_below="@+id/radioGroup1"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_toEndOf="@+id/addBtn"
+                android:backgroundTint="@color/accent"
+                android:contentDescription="@string/click_to_cancel"
+                android:elevation="15dp"
+                android:text="@string/cancel_button"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:translationZ="15dp" />
+
+        </RelativeLayout>
+    </ScrollView>
 
 </LinearLayout>
