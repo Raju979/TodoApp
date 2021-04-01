@@ -25,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.rajuthapa.todoapp.data.category.CategoryViewModel;
 import com.rajuthapa.todoapp.data.task.Task;
 import com.rajuthapa.todoapp.data.task.TaskViewModel;
+import com.rajuthapa.todoapp.ui.category.CategoryAdapter;
 import com.rajuthapa.todoapp.ui.task.AddEditTaskActivity;
 import com.rajuthapa.todoapp.ui.task.AddUpdateFragment;
 import com.rajuthapa.todoapp.ui.task.TaskAdapter;
@@ -215,14 +216,14 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
         RecyclerView recyclerViewTask = findViewById(R.id.recycler_view_task);
         recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewTask.setHasFixedSize(true);
-        final TaskAdapter taskAdapter = new TaskAdapter();
-        recyclerViewTask.setAdapter(taskAdapter);
+        final CategoryAdapter categoryAdapter = new CategoryAdapter();
+        recyclerViewTask.setAdapter(categoryAdapter);
         taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
         taskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
             @Override
             public void onChanged(List<Task> tasks) {
                 //update recycle view place
-                taskAdapter.setTasks(tasks);
+                categoryAdapter.setTasks(tasks);
             }
         });
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -233,11 +234,11 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                taskViewModel.delete(taskAdapter.getTaskAt(viewHolder.getAdapterPosition()));
+                taskViewModel.delete(categoryAdapter.getTaskAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(MainActivity.this,"Task Deleted",Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerViewTask);
-        taskAdapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
+        categoryAdapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Task task) {
                 Bundle bundle = new Bundle();
