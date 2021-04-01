@@ -1,12 +1,27 @@
 <resources>
-    <string name="app_name">TodoApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="cancel">Cancel</string>
-    <string name="add_priority">Add Priority</string>
-    <string name="description">Description</string>
-    <string name="title">Title</string>
+    <string name="app_name">What Today?</string>
     <string name="task_to_be_done">Task to be done</string>
-    <string name="due_date">Due Date</string>
-    <string name="date_not_set">Date Not Set</string>
+    <string name="enter_task_here">Enter task here..</string>
+    <string name="due_date">Due date</string>
+    <string name="date_not_set">Date not set</string>
+    <string name="click_to_set_date">Click to set date</string>
+    <string name="cancel_date">cancel date</string>
+    <string name="time_not_set">Time not set</string>
+    <string name="click_to_set_time">Click to set time</string>
+    <string name="cancel_time">cancel time</string>
+    <string name="enter_priority">Enter priority</string>
+    <string name="priority_prompt">Priority</string>
+    <string-array name="priority_array">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
+    <string name="add_button">Add</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="click_to_add">Click to add task</string>
+    <string name="click_to_cancel">Click to Cancel</string>
+    <string name="share_menu">Share</string>
+    <string name="language_setting">Change language</string>
+    <string name="search_task">Search task</string>
+    <string name="help_items">Search task</string>
 </resources>

@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         task_fragment  = (FrameLayout)findViewById(R.id.fragment_container);
-        buttonAddTask = findViewById(R.id.button_add_note);
+        buttonAddTask = findViewById(R.id.fabBtn);
         hideTaskFragment();
         buttonAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
             }
         });
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.tasksRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         final TaskAdapter adapter = new TaskAdapter();
@@ -116,36 +116,6 @@ public class MainActivity extends AppCompatActivity implements AddUpdateFragment
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK){
-            String title = data.getStringExtra(AddEditTaskActivity.EXTRA_TITLE);
-            String description = data.getStringExtra(AddEditTaskActivity.EXTRA_DESCRIPTION);
-            int priority = Integer.parseInt(data.getStringExtra(AddEditTaskActivity.EXTRA_PRIORITY));
-
-            Task task = new Task(title,description,priority,new Date());
-            taskViewModel.insert(task);
-            Toast.makeText(this,"Task Saved",Toast.LENGTH_SHORT).show();
-        }
-        else if(requestCode == EDIT_NOTE_REQUEST && resultCode == RESULT_OK){
-            int id = data.getIntExtra(AddEditTaskActivity.EXTRA_ID,-1);
-            if(id == -1){
-                Toast.makeText(this,"Task cannot be updated",Toast.LENGTH_SHORT).show();
-                return;
-            }
-            String title = data.getStringExtra(AddEditTaskActivity.EXTRA_TITLE);
-            String description = data.getStringExtra(AddEditTaskActivity.EXTRA_DESCRIPTION);
-            int priority = Integer.parseInt(data.getStringExtra(AddEditTaskActivity.EXTRA_PRIORITY));
-            Task task = new Task(title,description,priority,new Date());
-            task.setId(id);
-            taskViewModel.update(task);
-            Toast.makeText(this,"Task Updated",Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(this,"Task not saved",Toast.LENGTH_SHORT).show();
-        }
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         this.mn = menu;

@@ -1,0 +1,99 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    app:cardElevation="30dp"
+    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="@color/lightBlue"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        >
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbItemCheck"
+        android:paddingStart="8dp"
+        android:focusable="false"
+        android:checked="true"
+        android:layout_alignParentStart="true"
+        android:buttonTint="@android:color/holo_green_dark"
+        android:paddingLeft="8dp"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/tvItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dip"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif"
+        android:layout_alignTop="@+id/cbItemCheck"
+        android:layout_alignBottom="@+id/cbItemCheck"
+        android:text="Wash your Clothes."
+        android:layout_toEndOf="@+id/cbItemCheck"
+        android:textColor="@android:color/black"
+        android:layout_toRightOf="@+id/cbItemCheck" />
+
+    <TextView
+        android:id="@+id/tvItemPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dip"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif"
+        android:text="High"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignTop="@+id/tvItem"
+        android:layout_alignParentEnd="true"
+        tool:ignore="RelativeOverlap"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/tvDueDate"
+        android:layout_below="@+id/tvItem"
+        android:layout_toEndOf="@+id/cbItemCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2077/8/9"
+        android:padding="2dip"
+        android:textSize="15sp"
+        android:fontFamily="sans-serif"
+        android:textColor="#808080"
+        android:textStyle="italic"
+        android:layout_toRightOf="@+id/cbItemCheck" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_edit_24"
+
+            android:id="@+id/imgDate"
+            android:layout_below="@+id/tvItem"
+            android:onClick="editTask"
+            android:layout_toStartOf="@+id/deleteTask"
+            android:layout_toLeftOf="@+id/deleteTask" />
+
+        <ImageView
+            android:id="@+id/deleteTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/tvItem"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="0dp"
+            android:contentDescription="@string/cancel_date"
+            android:onClick="deleteTask"
+            android:src="@drawable/ic_baseline_delete_24" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

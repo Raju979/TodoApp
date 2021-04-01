@@ -36,9 +36,9 @@ public class  AddUpdateFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_add_update,container,false);
-        editTextTitle = v.findViewById(R.id.edit_text_title);
-        editTextDescription = v.findViewById(R.id.edit_text_description);
+        View v = inflater.inflate(R.layout.add_update_fragment,container,false);
+        editTextTitle = v.findViewById(R.id.etNewTask);
+        editTextDescription = v.findViewById(R.id.etDisplayDescription);
         numberPickerPriority = v.findViewById(R.id.number_picker_priority);
         numberPickerPriority.setMaxValue(10);
         numberPickerPriority.setMinValue(1);
@@ -51,7 +51,7 @@ public class  AddUpdateFragment extends Fragment{
             editTextDescription.setText(description);
             numberPickerPriority.setValue(priority);
         }
-        cancel = v.findViewById(R.id.button_cancel);
+        cancel = v.findViewById(R.id.cancelBtn);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
