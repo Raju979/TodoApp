@@ -1,38 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/cardview_light_background"
-    tools:context=".ui.task.AddUpdateTaskFragment">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    >
 
-    <EditText
-        android:id="@+id/edit_text_title_category"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/title"
-        android:inputType="text"
-        android:autofillHints="@string/title" />
-    <EditText
-        android:id="@+id/edit_text_description_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/description"
-        android:inputType="textMultiLine"
-        android:autofillHints="@string/description" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_priority"
-        />
+        android:background="@color/white"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context=".activities.NewItem">
 
-    <Button
-        android:id="@+id/button_cancel_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="@string/cancel" />
+        <TextView
+            android:id="@+id/tvCatName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:text="Category Name"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/edit_text_title_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCatName"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:hint="Enter Category Name Here..."
+            android:textColorHint="#B8BFC2" />
+
+        <TextView
+            android:id="@+id/tvCatDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_text_title_category"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:text="Category Description"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_text_description_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCatDesc"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:hint="Enter Category Description Here.."
+            android:textColorHint="#B8BFC2" />
+
+        <Button
+            android:id="@+id/button_cancel_category"
+            android:layout_width="131dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_text_description_category"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="37dp"
+            android:layout_marginEnd="150dp"
+            android:layout_marginRight="150dp"
+            android:backgroundTint="@color/accent"
+            android:contentDescription="@string/click_to_cancel"
+            android:elevation="15dp"
+            android:text="@string/cancel_button"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:translationZ="15dp" />
+
+    </RelativeLayout>
+</ScrollView>

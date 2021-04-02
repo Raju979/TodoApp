@@ -56,9 +56,9 @@ public class AddUpdateTaskFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_add_update_task,container,false);
-        editTextTitle = v.findViewById(R.id.edit_text_title_task);
-        editTextDescription = v.findViewById(R.id.edit_text_description_task);
+        View v = inflater.inflate(R.layout.add_update_fragment,container,false);
+        editTextTitle = v.findViewById(R.id.etNewTask);
+        editTextDescription = v.findViewById(R.id.etDisplayDescription);
         radioPriorityGroup = v.findViewById(R.id.radio_priority);
         radioPriorityGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -85,7 +85,7 @@ public class AddUpdateTaskFragment extends Fragment{
             editTextDescription.setText(description);
             radioPriorityGroup.check(priority == 1 ? R.id.radio0 : R.id.radio1);
         }
-        cancel = v.findViewById(R.id.button_cancel_task);
+        cancel = v.findViewById(R.id.cancelBtn);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +116,6 @@ public class AddUpdateTaskFragment extends Fragment{
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.findItem(R.id.delete_all_tasks).setVisible(false);
-        menu.findItem(R.id.delete_all_categories).setVisible(false);
         inflater.inflate(R.menu.add_task_menu,menu);
     }
 

@@ -1,23 +1,42 @@
 <resources>
-    <string name="app_name">Todo App</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="cancel">Cancel</string>
-    <string name="add_priority">Add Priority</string>
-    <string name="description">Description</string>
-    <string name="title">Title</string>
+    <string name="app_name">Todo App | What Today?</string>
+    <string name="task_to_be_done">Task to be done</string>
+    <string name="enter_task_here">Enter task here..</string>
+    <string name="due_date">Due date</string>
+    <string name="date_not_set">Date not set</string>
+    <string name="click_to_set_date">Click to set date</string>
+    <string name="cancel_date">cancel date</string>
+    <string name="time_not_set">Time not set</string>
+    <string name="click_to_set_time">Click to set time</string>
+    <string name="cancel_time">cancel time</string>
+    <string name="enter_priority">Enter priority</string>
+    <string name="priority_prompt">Priority</string>
+    <string-array name="priority_array">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
+    <string name="add_button">Add</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="click_to_add">Click to add task</string>
+    <string name="click_to_cancel">Click to Cancel</string>
+    <string name="share_menu">Share</string>
+    <string name="language_setting">Change language</string>
+    <string name="search_task">Search task</string>
+    <string name="help_items">Search task</string>
+    <string name="categories">Categories</string>
+    <string name="button_add_category">Add Category</string>
+    <string name="add_task">Add Task</string>
+    <string name="tasks">Tasks</string>
     <string name="category_name">Category Name</string>
     <string name="category_description">Category Description</string>
-    <string name="add_task">Add Task</string>
-    <string name="_1">1</string>
-    <string name="delete_all_categories">Delete all categories</string>
-    <string name="delete_all_tasks">Delete all tasks</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="add_priority">Add Priority</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_all_categories">Delete All Categories</string>
+    <string name="delete_all_tasks">Delete All Tasks</string>
     <string name="save">Save</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="button_add_category">Add Category</string>
-    <string name="categories">Categories</string>
-    <string name="tasks">Tasks</string>
     <string name="low_priority">Low Priority</string>
     <string name="high_priority">High Priority</string>
 </resources>
