@@ -1,5 +1,9 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">Todo App | What For Today?</string>
+=======
+    <string name="app_name">What Today?</string>
+>>>>>>> 2be89cc6d49491b7700bcf1e4abab1c20cb7471e
     <string name="task_to_be_done">Task to be done</string>
     <string name="enter_task_here">Enter task here..</string>
     <string name="due_date">Due date</string>
@@ -9,7 +13,11 @@
     <string name="time_not_set">Time not set</string>
     <string name="click_to_set_time">Click to set time</string>
     <string name="cancel_time">cancel time</string>
+<<<<<<< HEAD
     <string name="enter_priority">Select priority</string>
+=======
+    <string name="enter_priority">Enter priority</string>
+>>>>>>> 2be89cc6d49491b7700bcf1e4abab1c20cb7471e
     <string name="priority_prompt">Priority</string>
     <string-array name="priority_array">
         <item>Low</item>
@@ -24,6 +32,7 @@
     <string name="language_setting">Change language</string>
     <string name="search_task">Search task</string>
     <string name="help_items">Search task</string>
+<<<<<<< HEAD
     <string name="categories">Categories</string>
     <string name="button_add_category">Add Category</string>
     <string name="add_task">Add Task</string>
@@ -46,4 +55,6 @@
     <string name="high_prior">High Priority</string>
     <string name="perform_your_task">Perform Your Task</string>
     <string name="default_category">Default Category</string>
+=======
+>>>>>>> 2be89cc6d49491b7700bcf1e4abab1c20cb7471e
 </resources>

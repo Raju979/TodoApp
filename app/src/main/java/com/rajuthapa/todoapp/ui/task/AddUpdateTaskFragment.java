@@ -59,23 +59,9 @@ public class AddUpdateTaskFragment extends Fragment{
         View v = inflater.inflate(R.layout.add_update_fragment,container,false);
         editTextTitle = v.findViewById(R.id.etNewTask);
         editTextDescription = v.findViewById(R.id.etDisplayDescription);
-        radioPriorityGroup = v.findViewById(R.id.radio_priority);
-        radioPriorityGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    switch(checkedId){
-                        case R.id.radio0:
-                            // do operations specific to this selection
-                            priority = 1;
-                            break;
-                        case R.id.radio1:
-                            // do operations specific to this selection
-                            priority = 2;
-                            break;
-                    }
-            }
-        });
-
+        numberPickerPriority = v.findViewById(R.id.number_picker_priority);
+        numberPickerPriority.setMaxValue(10);
+        numberPickerPriority.setMinValue(1);
 
         if(getArguments() != null){
             String title = getArguments().getString("title");

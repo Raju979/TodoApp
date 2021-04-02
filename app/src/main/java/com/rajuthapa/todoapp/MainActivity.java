@@ -49,11 +49,35 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        buttonAddTask = findViewById(R.id.button_add_task);
+        task_fragment  = (FrameLayout)findViewById(R.id.fragment_container);
+        buttonAddTask = findViewById(R.id.fabBtn);
+        hideTaskFragment();
         buttonAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayTaskFragment(null);
+//                Intent intent = new Intent(MainActivity.this, AddEditTaskActivity.class);
+//                startActivityForResult(intent,ADD_NOTE_REQUEST);
+                showTaskFragment();
+                fragment = new AddUpdateFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container,fragment)
+                        .commit();
+            }
+        });
+
+        RecyclerView recyclerView = findViewById(R.id.tasksRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        final TaskAdapter adapter = new TaskAdapter();
+        recyclerView.setAdapter(adapter);
+
+
+        taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
+        taskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
+            @Override
+            public void onChanged(List<Task> tasks) {
+                //update recycle view place
+                adapter.setTasks(tasks);
             }
         });
         addCategoryButton = findViewById(R.id.button_add_category);
@@ -63,9 +87,8 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
                 displayCategoryFragment(null);
             }
         });
-        manageCategoryView();
-        manageTaskView();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         this.mn = menu;

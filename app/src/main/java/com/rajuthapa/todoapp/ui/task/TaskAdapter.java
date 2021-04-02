@@ -61,9 +61,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         public TaskHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.tvItem);
-            textViewDescription= itemView.findViewById(R.id.tvDescription);
+            textViewDescription= itemView.findViewById(R.id.tvDueDate);
             textViewPriority = itemView.findViewById(R.id.tvItemPriority);
-            textViewDate = itemView.findViewById(R.id.tvDueDate);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
