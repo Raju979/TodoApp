@@ -29,7 +29,6 @@ import com.rajuthapa.todoapp.data.task.Task;
 import com.rajuthapa.todoapp.data.task.TaskViewModel;
 import com.rajuthapa.todoapp.ui.category.AddUpdateCatFragment;
 import com.rajuthapa.todoapp.ui.category.CategoryAdapter;
-import com.rajuthapa.todoapp.ui.task.AddEditTaskActivity;
 import com.rajuthapa.todoapp.ui.task.AddUpdateTaskFragment;
 import com.rajuthapa.todoapp.ui.task.TaskAdapter;
 
@@ -40,9 +39,6 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
 
     private TaskViewModel taskViewModel;
     private CategoryViewModel categoryViewModel;
-    
-    public static final int ADD_NOTE_REQUEST = 1;
-    public static final int EDIT_NOTE_REQUEST = 2;
     private FloatingActionButton buttonAddTask;
     private Button addCategoryButton;
     private Menu mn;
@@ -55,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
         buttonAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, AddEditTaskActivity.class);
-//                startActivityForResult(intent,ADD_NOTE_REQUEST);
                 displayTaskFragment(null);
             }
         });
@@ -69,37 +63,6 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
         });
         manageCategoryView();
         manageTaskView();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK){
-            String title = data.getStringExtra(AddEditTaskActivity.EXTRA_TITLE);
-            String description = data.getStringExtra(AddEditTaskActivity.EXTRA_DESCRIPTION);
-            int priority = Integer.parseInt(data.getStringExtra(AddEditTaskActivity.EXTRA_PRIORITY));
-
-            Task task = new Task(title,description,priority,new Date(),1);
-            taskViewModel.insert(task);
-            Toast.makeText(this,"Task Saved",Toast.LENGTH_SHORT).show();
-        }
-        else if(requestCode == EDIT_NOTE_REQUEST && resultCode == RESULT_OK){
-            int id = data.getIntExtra(AddEditTaskActivity.EXTRA_ID,-1);
-            if(id == -1){
-                Toast.makeText(this,"Task cannot be updated",Toast.LENGTH_SHORT).show();
-                return;
-            }
-            String title = data.getStringExtra(AddEditTaskActivity.EXTRA_TITLE);
-            String description = data.getStringExtra(AddEditTaskActivity.EXTRA_DESCRIPTION);
-            int priority = Integer.parseInt(data.getStringExtra(AddEditTaskActivity.EXTRA_PRIORITY));
-            Task task = new Task(title,description,priority,new Date(),1);
-            task.setId(id);
-            taskViewModel.update(task);
-            Toast.makeText(this,"Task Updated",Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(this,"Task not saved",Toast.LENGTH_SHORT).show();
-        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -253,13 +216,6 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
         taskAdapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Task task) {
-//                Intent intent = new Intent(MainActivity.this, AddEditTaskActivity.class);
-//                intent.putExtra(AddEditTaskActivity.EXTRA_ID,task.getId());
-//                intent.putExtra(AddEditTaskActivity.EXTRA_TITLE,task.getTitle());
-//                intent.putExtra(AddEditTaskActivity.EXTRA_DESCRIPTION,task.getDescription());
-//                intent.putExtra(AddEditTaskActivity.EXTRA_PRIORITY,task.getPriority());
-//                startActivityForResult(intent,EDIT_NOTE_REQUEST);
-//
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", task.getId());
                 bundle.putString("title", task.getTitle());

@@ -25,7 +25,6 @@ import com.rajuthapa.todoapp.R;
 public class AddUpdateTaskFragment extends Fragment{
     private EditText editTextTitle;
     private  EditText editTextDescription;
-    private NumberPicker numberPickerPriority;
     private RadioGroup radioPriorityGroup;
     private int priority = 1;
     private Button cancel;
@@ -47,9 +46,6 @@ public class AddUpdateTaskFragment extends Fragment{
         editTextTitle = v.findViewById(R.id.edit_text_title_task);
         editTextDescription = v.findViewById(R.id.edit_text_description_task);
         radioPriorityGroup = v.findViewById(R.id.radio_priority);
-//        numberPickerPriority = v.findViewById(R.id.number_picker_priority);
-//        numberPickerPriority.setMaxValue(10);
-//        numberPickerPriority.setMinValue(1);
         radioPriorityGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -73,7 +69,7 @@ public class AddUpdateTaskFragment extends Fragment{
             int priority = getArguments().getInt("priority");
             editTextTitle.setText(title);
             editTextDescription.setText(description);
-            numberPickerPriority.setValue(priority);
+            radioPriorityGroup.check(priority == 1 ? R.id.radio0 : R.id.radio1);
         }
         cancel = v.findViewById(R.id.button_cancel_task);
         cancel.setOnClickListener(new View.OnClickListener() {

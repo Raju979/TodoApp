@@ -33,7 +33,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         Task currentTask = tasks.get(position);
         holder.textViewTitle.setText(currentTask.getTitle());
         holder.textViewDescription.setText(currentTask.getDescription());
-        holder.textViewPriority.setText(String.valueOf(currentTask.getPriority()));
+        holder.textViewPriority.setText(currentTask.getPriority() == 1 ? "Low Priority" : "High Priority");
     }
 
     @Override

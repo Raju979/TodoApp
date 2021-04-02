@@ -17,4 +17,5 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="button_add_category">Add Category</string>
     <string name="categories">Categories</string>
+    <string name="tasks">Tasks</string>
 </resources>
