@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Task.class, Category.class},version = 3,exportSchema = false)
+@Database(entities = {Task.class, Category.class},version = 4,exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class TodoDatabase extends RoomDatabase {
 

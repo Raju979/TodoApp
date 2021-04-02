@@ -33,6 +33,7 @@ import com.rajuthapa.todoapp.ui.category.CategoryAdapter;
 import com.rajuthapa.todoapp.ui.task.AddUpdateTaskFragment;
 import com.rajuthapa.todoapp.ui.task.TaskAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
             fragmentTransaction.remove(taskAddUpdateCategoryFragment).commit();
         }
         //change menu icons and title
-        setTitle("Todo App");
+        setTitle("Todo App | What For Today?");
         mn.findItem(R.id.delete_all_tasks).setVisible(true);
         mn.findItem(R.id.save_task).setVisible(false);
         addCategoryButton.setVisibility(View.VISIBLE);
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
             fragmentTransaction.remove(taskAddUpdateTaskFragment).commit();
         }
         //change menu icons and title
-        setTitle("Todo App");
+        setTitle("Todo App | What For Today?");
         mn.findItem(R.id.delete_all_tasks).setVisible(true);
         mn.findItem(R.id.save_task).setVisible(false);
         addCategoryButton.setVisibility(View.VISIBLE);
@@ -174,8 +175,9 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
 
     @Override
     public void onInputSend(int id,String title, String description, int priority) {
-        this.setTitle("Todo App");
-        Task task = new Task(title,description,priority,new Date(),3);
+        this.setTitle("Todo App | What For Today?");
+
+        Task task = new Task(title,description,priority,new Date(),1);
         if(id != -1){
             task.setId(id);
             taskViewModel.update(task);
@@ -267,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
 
     @Override
     public void onInputCategorySend(int id, String title, String description) {
-        this.setTitle("Todo App");
+        this.setTitle("Todo App | What For Today?");
         Category category = new Category(title,description);
         if(id != -1){
             category.setId(id);

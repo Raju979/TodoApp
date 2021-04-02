@@ -37,7 +37,7 @@
             android:layout_toRightOf="@+id/cbItemCheck"
             android:fontFamily="sans-serif"
             android:padding="4dip"
-            android:text="Perform Your Task"
+            android:text="@string/perform_your_task"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
@@ -50,7 +50,7 @@
             android:layout_alignParentRight="true"
             android:fontFamily="sans-serif"
             android:padding="4dip"
-            android:text="High"
+            android:text="@string/high_prior"
             android:textColor="@color/lightBlue"
             android:textSize="18sp"
             tool:ignore="RelativeOverlap" />
@@ -67,7 +67,7 @@
             android:layout_toRightOf="@+id/cbItemCheck"
             android:fontFamily="sans-serif"
             android:padding="2dip"
-            android:text="2077/8/9"
+            android:text="@string/_10_12_2021"
             android:textColor="@android:color/holo_green_light"
             android:textSize="15sp"
             android:textStyle="italic" />
@@ -82,7 +82,7 @@
             android:layout_marginTop="-11dp"
             android:layout_toEndOf="@+id/cbItemCheck"
             android:layout_toRightOf="@+id/cbItemCheck"
-            android:text="Description"
+            android:text="@string/description_tasks"
             android:textColor="@color/white"
             android:textSize="16sp" />
 

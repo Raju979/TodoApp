@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.rajuthapa.todoapp.R;
 import com.rajuthapa.todoapp.data.task.Task;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +31,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         Task currentTask = tasks.get(position);
         holder.textViewTitle.setText(currentTask.getTitle());
         holder.textViewDescription.setText(currentTask.getDescription());
         holder.textViewPriority.setText(currentTask.getPriority() == 1 ? "Low Priority" : "High Priority");
+        holder.textViewDate.setText(sdf.format(currentTask.getCreatedDate()));
     }
 
     @Override
@@ -53,13 +56,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         private TextView textViewTitle;
         private TextView textViewDescription;
         private TextView textViewPriority;
+        private TextView textViewDate;
 
         public TaskHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.tvItem);
             textViewDescription= itemView.findViewById(R.id.tvDescription);
             textViewPriority = itemView.findViewById(R.id.tvItemPriority);
-
+            textViewDate = itemView.findViewById(R.id.tvDueDate);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -3,7 +3,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,19 +31,19 @@
             android:layout_alignParentLeft="true" />
 
         <EditText
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
             android:id="@+id/etNewTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/tvNewTask"
             android:layout_alignParentStart="true"
-            android:textColorHint="#B8BFC2"
+            android:layout_alignParentLeft="true"
             android:hint="@string/enter_task_here"
-            android:layout_alignParentLeft="true" />
+            android:textColorHint="#B8BFC2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Task Description"
+            android:text="@string/task_description"
             android:textColor="@color/colorPrimary"
             android:layout_below="@+id/etNewTask"
             android:textStyle="bold"
@@ -52,74 +54,43 @@
             android:layout_alignParentLeft="true" />
 
         <EditText
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
             android:id="@+id/etDisplayDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/tvDescription"
             android:layout_alignParentStart="true"
-            android:textColorHint="#B8BFC2"
-            android:hint="Enter Task Description Here.."
-            android:layout_alignParentLeft="true" />
-
-
+            android:layout_alignParentLeft="true"
+            android:hint="@string/enter_task_description_here"
+            android:textColorHint="#B8BFC2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
-            android:text="@string/due_date"
+            android:text="Select Category"
             android:textSize="20sp"
-            android:id="@+id/tvDate"
+            android:id="@+id/tvCat"
             android:layout_marginTop="30dp"
             android:layout_below="@+id/etDisplayDescription"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true" />
 
-        <EditText
-            android:layout_width="250dp"
+        <RadioGroup
+            android:id="@+id/radio_category"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/etDisplayDate"
-            android:layout_toStartOf="@+id/imgDate"
-            android:hint="@string/date_not_set"
-            android:textColorHint="#B8BFC2"
-            android:onClick="onDateSet"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:cursorVisible="false"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:paddingTop="8sp"
-            android:layout_below="@+id/tvDate"
-            android:layout_alignParentStart="true"
-            tools:ignore="TextFields"
-            android:layout_toLeftOf="@+id/imgDate"
-            android:layout_alignParentLeft="true" />
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/tvCat"
+            >
 
-        <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@drawable/ic_baseline_date_range"
-            android:id="@+id/imgDate"
-
-            android:layout_below="@+id/tvDate"
-            android:layout_toStartOf="@+id/imgDateClear"
-            android:contentDescription="@string/click_to_set_date"
-            android:layout_toLeftOf="@+id/imgDateClear" />
-
-        <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@drawable/ic_baseline_cancel"
-            android:layout_marginStart="10dp"
-
-            android:id="@+id/imgDateClear"
-            android:layout_below="@+id/tvDate"
-            android:layout_alignParentEnd="true"
-            android:onClick="clearDate"
-            android:contentDescription="@string/cancel_date"
-            android:layout_marginLeft="10dp"
-            android:layout_alignParentRight="true" />
+            <RadioButton
+                android:id="@+id/radio2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_category"
+                android:checked="true"/>
+        </RadioGroup>
 
         <TextView
             android:layout_width="wrap_content"
@@ -130,7 +101,7 @@
             android:textSize="20sp"
             android:layout_marginTop="30dp"
             android:id="@+id/tvPriority"
-            android:layout_below="@+id/imgDate"
+            android:layout_below="@+id/radio_category"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true" />
 
@@ -165,8 +136,8 @@
             android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="38dp"
-            android:layout_marginEnd="146dp"
-            android:layout_marginRight="146dp"
+            android:layout_marginEnd="122dp"
+            android:layout_marginRight="122dp"
             android:backgroundTint="@color/accent"
             android:contentDescription="@string/click_to_cancel"
             android:elevation="15dp"
