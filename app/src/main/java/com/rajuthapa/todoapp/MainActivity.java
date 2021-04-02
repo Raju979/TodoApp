@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,6 +33,7 @@ import com.rajuthapa.todoapp.ui.category.CategoryAdapter;
 import com.rajuthapa.todoapp.ui.task.AddUpdateTaskFragment;
 import com.rajuthapa.todoapp.ui.task.TaskAdapter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
     private FloatingActionButton buttonAddTask;
     private Button addCategoryButton;
     private Menu mn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

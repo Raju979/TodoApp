@@ -2,25 +2,39 @@ package com.rajuthapa.todoapp.ui.task;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.rajuthapa.todoapp.MainActivity;
 import com.rajuthapa.todoapp.R;
+import com.rajuthapa.todoapp.data.category.Category;
+import com.rajuthapa.todoapp.data.category.CategoryViewModel;
+import com.rajuthapa.todoapp.ui.category.CategoryAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddUpdateTaskFragment extends Fragment{
     private EditText editTextTitle;
@@ -78,8 +92,10 @@ public class AddUpdateTaskFragment extends Fragment{
                 ((MainActivity)getActivity()).closeTaskFragment();
             }
         });
+
         return v;
     }
+
     @Override
     public void onAttach(Context context){
         super.onAttach(context);

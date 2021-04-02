@@ -24,13 +24,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_priority"
+        android:text="@string/button_add_category"
         />
-<!--    <NumberPicker-->
-<!--        android:id="@+id/number_picker_priority"-->
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
+<!--        android:spinnerMode="dropdown"-->
+<!--        android:textColor="#FF0000"-->
 <!--        />-->
+
     <RadioGroup
         android:id="@+id/radio_priority"
         android:layout_width="wrap_content"
@@ -42,12 +45,12 @@
             android:id="@+id/radio0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Low Priority" />
+            android:text="@string/low_priority" />
         <RadioButton
             android:id="@+id/radio1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="High Priority" />
+            android:text="@string/high_priority" />
 
 
     </RadioGroup>
