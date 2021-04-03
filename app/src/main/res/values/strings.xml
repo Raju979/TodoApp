@@ -46,4 +46,5 @@
     <string name="high_prior">High Priority</string>
     <string name="perform_your_task">Perform Your Task</string>
     <string name="default_category">Default Category</string>
+    <string name="cat">Category</string>
 </resources>

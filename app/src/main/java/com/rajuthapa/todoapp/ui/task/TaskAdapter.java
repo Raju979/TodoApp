@@ -37,6 +37,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         holder.textViewDescription.setText(currentTask.getDescription());
         holder.textViewPriority.setText(currentTask.getPriority() == 1 ? "Low Priority" : "High Priority");
         holder.textViewDate.setText(sdf.format(currentTask.getCreatedDate()));
+        holder.textViewCat.setText(currentTask.getCat_name());
     }
 
     @Override
@@ -57,6 +58,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         private TextView textViewDescription;
         private TextView textViewPriority;
         private TextView textViewDate;
+        private TextView textViewCat;
 
         public TaskHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,6 +66,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
             textViewDescription= itemView.findViewById(R.id.tvDescription);
             textViewPriority = itemView.findViewById(R.id.tvItemPriority);
             textViewDate = itemView.findViewById(R.id.tvDueDate);
+            textViewCat = itemView.findViewById(R.id.tv_cat_task);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

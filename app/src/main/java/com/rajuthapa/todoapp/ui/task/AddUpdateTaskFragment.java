@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -43,12 +44,16 @@ public class AddUpdateTaskFragment extends Fragment{
     private int priority = 1;
     private Button cancel;
     private fragTaskAddUpdateListener listener;
+    private CategoryViewModel categoryViewModel;
+    private RadioButton radioButtonCategory;
+    private String taskCategory;
+    private RadioGroup radioGroupCategory;
 
     public AddUpdateTaskFragment(){
 
     }
     public interface fragTaskAddUpdateListener{
-        void onInputSend(int id, String title, String description, int priority);
+        void onInputSend(int id, String title, String description, int priority, String catName);
     }
     public static AddUpdateTaskFragment newInstance() {
         return new AddUpdateTaskFragment();
@@ -93,6 +98,31 @@ public class AddUpdateTaskFragment extends Fragment{
             }
         });
 
+        radioGroupCategory = v.findViewById(R.id.radio_category);
+        radioGroupCategory.setOrientation(RadioGroup.HORIZONTAL);
+        categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        categoryViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categories) {
+                for (Category an : categories) {
+                        String answers_log = " " + an.getCat_name();
+                        RadioButton radioButton = new RadioButton(getActivity());
+                        radioButton.setText(answers_log);
+                    radioGroupCategory.addView(radioButton);
+                }
+            }
+        });
+        radioGroupCategory.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // get selected radio button from radioGroup
+                int selectedCat = radioGroupCategory.getCheckedRadioButtonId();
+
+                // find the radiobutton by returned id
+                radioButtonCategory = (RadioButton) v.findViewById(selectedCat);
+                taskCategory = radioButtonCategory.getText().toString();
+            }
+        });
         return v;
     }
 
@@ -134,14 +164,14 @@ public class AddUpdateTaskFragment extends Fragment{
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
 
-        if(title.trim().isEmpty() || description.trim().isEmpty()){
-            Toast.makeText(getActivity(),"Please fill title and description",Toast.LENGTH_SHORT).show();
+        if(title.trim().isEmpty() || description.trim().isEmpty() || taskCategory ==  null){
+            Toast.makeText(getActivity(),"Please fill title, category and description",Toast.LENGTH_SHORT).show();
             return;
         }
         if(getArguments() != null){
             id = getArguments().getInt("id");
         }
-        listener.onInputSend(id,title,description,priority);
+        listener.onInputSend(id,title,description,priority,taskCategory);
     }
 
     @Override

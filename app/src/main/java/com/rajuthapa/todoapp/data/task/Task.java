@@ -32,15 +32,18 @@ public class Task {
 
     private int cat_id;
 
+    private String cat_name;
+
     @ColumnInfo(name = "created_date")
     private Date createdDate;
 
-    public Task(String title, String description, int priority, Date createdDate, int cat_id) {
+    public Task(String title, String description, int priority, Date createdDate, int cat_id, String cat_name) {
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.createdDate = createdDate;
         this.cat_id = cat_id;
+        this.cat_name = cat_name;
     }
 
     public void setId(int id) {
@@ -68,5 +71,9 @@ public class Task {
     }
     public int getCat_id() {
         return cat_id;
+    }
+
+    public String getCat_name() {
+        return cat_name;
     }
 }

@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
+    android:layout_marginTop="8dp"
     app:cardBackgroundColor="@color/purple_700"
     app:cardCornerRadius="8dp"
     app:cardElevation="30dp">
@@ -85,6 +86,18 @@
             android:text="@string/description_tasks"
             android:textColor="@color/white"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_cat_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvDescription"
+            android:layout_toEndOf="@+id/cbItemCheck"
+            android:layout_toRightOf="@+id/cbItemCheck"
+            android:text="@string/cat"
+            android:textColor="@color/teal_700"
+            android:textSize="16sp"
+            />
 
 
     </RelativeLayout>

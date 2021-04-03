@@ -174,10 +174,10 @@ public class MainActivity extends AppCompatActivity implements AddUpdateTaskFrag
     }
 
     @Override
-    public void onInputSend(int id,String title, String description, int priority) {
+    public void onInputSend(int id,String title, String description, int priority, String catName) {
         this.setTitle("Todo App | What For Today?");
 
-        Task task = new Task(title,description,priority,new Date(),1);
+        Task task = new Task(title,description,priority,new Date(),1,catName);
         if(id != -1){
             task.setId(id);
             taskViewModel.update(task);
