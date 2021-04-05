@@ -1,5 +1,7 @@
 Final Assignment - ToDo App
 ====================================
+## Full app demo
+!['Full app demo'](./full_app_use.gif)
 
 ## Add Category
 !['Added category gif'](./add_category.gif)
